@@ -1,10 +1,38 @@
 (ns recursion)
 
-(defn product [coll]
-  :-)
+(defn
+  product
+  [coll]
+  (if (empty? coll)
+    1
+    (* (first coll)
+       (product (rest coll))))
+  )
 
-(defn singleton? [coll]
-  :-)
+(product [])
+(product [1 2 3])
+(product [1 2 3 4])
+(product [0 1 2])
+(product #{2 3 4})
+
+
+;(singleton? [nil] aiheutti ongelman -> 'filtteröidään' siis vain false ulos (not (false? ...)) tyyliin
+(defn
+  singleton?
+  [coll]
+  (if (empty? coll)
+    false
+    (and (not (false? (first coll))) (empty? (rest coll))))
+  )
+
+(rest [1]) ;antaa tyhjän
+(singleton? [1])
+(singleton? #{2})
+(singleton? [])
+(singleton? [1 2 3])
+(singleton? [nil])
+(singleton? [1 nil])
+
 
 (defn my-last [coll]
   :-)
