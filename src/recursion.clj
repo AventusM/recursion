@@ -16,7 +16,7 @@
 (product #{2 3 4})
 
 
-;(singleton? [nil] aiheutti ongelman -> 'filtteröidään' siis vain false ulos (not (false? ...)) tyyliin
+;(singleton? [nil]) aiheutti ongelman -> 'filtteröidään' siis vain false ulos (not (false? ...)) tyyliin
 (defn
   singleton?
   [coll]
@@ -34,11 +34,25 @@
 (singleton? [1 nil])
 
 
-(defn my-last [coll]
-  :-)
+(defn
+  my-last
+  [coll]
+  (if (empty? (rest coll))
+    (first coll)
+    (my-last (rest coll)))
+  )
 
-(defn max-element [a-seq]
-  :-)
+(my-last [])
+(my-last [1 2 3])
+(my-last [2 5])
+
+(defn
+  max-element
+  [a-seq]
+
+  )
+
+;(max 2 nil) err
 
 (defn seq-max [seq-1 seq-2]
   [:-])
