@@ -76,12 +76,22 @@
 (seq-max [1 2] [3 4])
 ;(seq-max [3 4] [1 2]) Jälkimmäinen palautuu, jos pituus sama
 
-
+;tehtävän pointtina näköjään yleistää ajattelu alkoista joukkoihin (vrt. max-element)
 (defn longest-sequence [a-seq]
-  [:-])
+  (if (empty? (rest a-seq))
+    (first a-seq)
+    (seq-max (first a-seq)
+             (longest-sequence (rest a-seq))))
+  )
 
-(defn my-filter [pred? a-seq]
-  [:-])
+(longest-sequence [[1 2] [] [1 2 3]])
+(longest-sequence [[1 2]])
+(longest-sequence [])
+
+(defn my-filter
+  [pred? a-seq]
+  [:-]
+  )
 
 (defn sequence-contains? [elem a-seq]
   :-)
