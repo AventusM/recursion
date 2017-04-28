@@ -46,16 +46,36 @@
 (my-last [1 2 3])
 (my-last [2 5])
 
+;yllättävän samanlainen päättely kuin edellisessä tehtävässä
 (defn
   max-element
   [a-seq]
-
+  (if (empty? (rest a-seq))
+    (first a-seq)
+    (max (first a-seq)
+         (max-element (rest a-seq))))
   )
 
-;(max 2 nil) err
+(max-element [2 4 1 4])
+(max-element [2])
+(max-element [])
 
-(defn seq-max [seq-1 seq-2]
-  [:-])
+
+(defn seq-max
+  [seq-1 seq-2]
+  (let [length-seq1 (count seq-1)
+        length-seq2 (count seq-2)]
+
+    (if (> length-seq1 length-seq2)
+      seq-1
+      seq-2))
+  )
+
+
+(seq-max [1] [1 2])
+(seq-max [1 2] [3 4])
+;(seq-max [3 4] [1 2]) Jälkimmäinen palautuu, jos pituus sama
+
 
 (defn longest-sequence [a-seq]
   [:-])
