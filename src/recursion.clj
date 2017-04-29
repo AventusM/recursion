@@ -88,10 +88,21 @@
 (longest-sequence [[1 2]])
 (longest-sequence [])
 
+;(or (and ...)) ei toimi -> käytettävä nested-if -> siis cond
 (defn my-filter
   [pred? a-seq]
-  [:-]
+  (cond
+    (empty? a-seq) a-seq
+    (pred? (first a-seq)) (cons (first a-seq)
+                                (my-filter pred? (rest a-seq)))
+    :else (my-filter pred? (rest a-seq)))
   )
+
+
+(my-filter odd? [1 2 3 4])
+(my-filter (fn [x] (> x 9000)) [12 49 90 9001])
+(my-filter even? [1 3 5 7])
+
 
 (defn sequence-contains? [elem a-seq]
   :-)
