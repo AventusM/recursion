@@ -117,11 +117,39 @@
 (sequence-contains? 3 [4 7 9])
 (sequence-contains? :pony [])
 
-(defn my-take-while [pred? a-seq]
-  [:-])
+;yhdistetään kaksi edellistä tehtävää
+;TOSI outo break. false ei tuottanut oikeaa tulosta. Kokeilu tyhjällä
+;merkkijonolla toi "" kolmanteen testiin. Lopulta kokeilu () toi oikean tuloksen
+(defn
+  my-take-while
+  [pred? a-seq]
+  (cond
+    (empty? a-seq) a-seq
+    (pred? (first a-seq)) (cons (first a-seq)
+                                (my-take-while pred? (rest a-seq)))
+    :else ()
+    )
+  )
 
+(my-take-while odd? [1 2 3 4])
+(my-take-while odd? [1 3 4 5])
+(my-take-while even? [1 3 4 5])
+(my-take-while odd? [])
+
+;ymmärsin oikein, että kyseessä oli komplementti edellisestä tehtävästä. Sen sijaan, että
+;alkaisin copypasteamaan tehtävänantoa niin muistin clojure.set/unionin aiemmin ja pienen googlailun jälkeen
+;ymmärsin, että halutun muodon sai käsittelemällä a-seq:ejä joukkoina ja lopuksi muuntamalla ne listamuotoon
+;joko "into" tai "seq" - funktioiden avulla
 (defn my-drop-while [pred? a-seq]
-  [:-])
+  (cond
+    (empty? a-seq) a-seq
+    :else (seq (clojure.set/difference (set a-seq) (my-take-while pred? (set a-seq)))))
+  )
+
+(my-drop-while odd? [1 2 3 4])
+(my-drop-while odd? [1 3 4 5])
+(my-drop-while even? [1 3 4 5])
+(my-drop-while odd? [])
 
 (defn seq= [a-seq b-seq]
   :-)
