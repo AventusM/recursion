@@ -104,8 +104,18 @@
 (my-filter even? [1 3 5 7])
 
 
-(defn sequence-contains? [elem a-seq]
-  :-)
+(defn
+  sequence-contains?
+  [elem a-seq]
+  (cond
+    (empty? a-seq) false
+    (not (= elem (first a-seq))) (sequence-contains? elem (rest a-seq))
+    :else true)
+  )
+
+(sequence-contains? 3 [1 2 3])
+(sequence-contains? 3 [4 7 9])
+(sequence-contains? :pony [])
 
 (defn my-take-while [pred? a-seq]
   [:-])
