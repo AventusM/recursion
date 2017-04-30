@@ -181,11 +181,26 @@
 (my-map + [1 2 3 4] [0 0 0])
 (my-map + [1 2 3] [])
 
-(defn power [n k]
-  :-)
+(defn
+  power
+  [n k]
+  (if (zero? k)
+    1
+    (* n (power n (dec k))))
+  )
 
-(defn fib [n]
-  :-)
+(power 2 0)
+(power 2 1)
+(power 2 2)
+(power 2 3)
+(power 2 4)
+(power 2 5)
+
+(defn
+  fib
+  [n]
+
+  )
 
 (defn my-repeat [how-many-times what-to-repeat]
   [:-])
