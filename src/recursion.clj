@@ -136,8 +136,7 @@
 (my-take-while even? [1 3 4 5])
 (my-take-while odd? [])
 
-;ymmärsin oikein, että kyseessä oli komplementti edellisestä tehtävästä. Sen sijaan, että
-;alkaisin copypasteamaan tehtävänantoa niin muistin clojure.set/unionin aiemmin ja pienen googlailun jälkeen
+;Sen sijaan, että alkaisin copypasteamaan tehtävänantoa niin muistin clojure.set/unionin aiemmin ja pienen googlailun jälkeen
 ;ymmärsin, että halutun muodon sai käsittelemällä a-seq:ejä joukkoina ja lopuksi muuntamalla ne listamuotoon
 ;joko "into" tai "seq" - funktioiden avulla
 (defn my-drop-while [pred? a-seq]
@@ -151,11 +150,36 @@
 (my-drop-while even? [1 3 4 5])
 (my-drop-while odd? [])
 
-(defn seq= [a-seq b-seq]
-  :-)
+(defn seq=
+  [a-seq b-seq]
+  (cond
+    (and (empty? a-seq) (empty? b-seq))
+      true
+    ;Allaolevalla tarkistuksella saa nil vs tyhjä joukko haluttuun muotoon ILMAN aikavaativuudeltaan huonoa count - metodia
+    (or (empty? a-seq) (empty? b-seq))
+      false
+    (= (first a-seq) (first b-seq))
+      (seq= (rest a-seq) (rest b-seq))
+    :else
+      false)
+  )
 
-(defn my-map [f seq-1 seq-2]
-  [:-])
+(seq= [1 2 4] '(1 2 4))
+(seq= [nil 1] [nil])
+
+;Muokataan esimerkkiä "Saving the list"
+(defn
+  my-map
+  [f seq-1 seq-2]
+  (if (or (empty? seq-1) (empty? seq-2))
+    '()
+    (cons (f (first seq-1) (first seq-2))
+          (my-map f (rest seq-1) (rest seq-2))))
+  )
+
+(my-map + [1 2 3] [4 4 4])
+(my-map + [1 2 3 4] [0 0 0])
+(my-map + [1 2 3] [])
 
 (defn power [n k]
   :-)
