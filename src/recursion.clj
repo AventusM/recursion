@@ -199,14 +199,40 @@
 (defn
   fib
   [n]
-
+  (cond
+    (= n 0) 0
+    (= n 1) 1
+    :else (+ (fib (- n 1))
+             (fib (- n 2))))
   )
 
-(defn my-repeat [how-many-times what-to-repeat]
-  [:-])
+(fib 0)
+(fib 1)
+(fib 2)
+(fib 3)
+(fib 4)
+(fib 5)
+(fib 6)
+(fib 10)
 
-(defn my-range [up-to]
-  [:-])
+(defn my-repeat
+  [how-many-times what-to-repeat]
+  (if (< how-many-times 1)
+    '()
+    ;SULKEET POIS, MUUTEN JOUDUT LAITTAMAAN "turhan" FUNKTION MUKAAN
+    (cons what-to-repeat
+          (my-repeat (dec how-many-times) what-to-repeat))
+    )
+  )
+
+(my-repeat 2 :a)
+(my-repeat 3 "lol")
+(my-repeat -1 :a)
+
+(defn my-range
+  [up-to]
+
+  )
 
 (defn tails [a-seq]
   [:-])
